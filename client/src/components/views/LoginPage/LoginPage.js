@@ -1,31 +1,34 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../../../_actions/user_action'
 import { withRouter } from 'react-router-dom'
 
+import { Form, Input, Button, Checkbox } from 'antd';
+
+const layout = {
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 16,
+    },
+  };
+  const tailLayout = {
+    wrapperCol: {
+      offset: 8,
+      span: 16,
+    },
+  };
+
 function LoginPage(props) {
     const dispatch = useDispatch();
 
-    const [Email, setEmail] = useState('')
-    const [Password, setPassword] = useState('')
-
-    const onEmailHandler = (event) => {
-        setEmail(event.currentTarget.value)
-    }
-
-    const onPasswordHandler = (event) => {
-        setPassword(event.currentTarget.value)
-    }
-
-    const onSubmitHandler = (event) =>{
-        event.preventDefault();
-
-        console.log('Email', Email);
-        console.log('Password', Password);
+    const onFinish = values => {
+        console.log('Success:', values);
 
         let body = {
-            email: Email,
-            password: Password
+            email: values.email,
+            password: values.password
         }
 
         dispatch(loginUser(body))
@@ -35,10 +38,12 @@ function LoginPage(props) {
             }else{
                 alert('Error')
             }
-        })
-
-        
-    }
+        })        
+    };
+    
+    const onFinishFailed = errorInfo => {
+        console.log('Failed:', errorInfo);
+    };
 
     return (
         <div style={{
@@ -49,16 +54,47 @@ function LoginPage(props) {
             height: '100vh'
             }}>
 
-            <form style={{ display: 'flex', flexDirection: 'column' }}
-                onSubmit={onSubmitHandler}
+            <Form
+                {...layout}
+                name="basic"
+                initialValues={{
+                    remember: true,
+                }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
             >
-                <label>Email</label>
-                <input type="email" value={Email} onChange={onEmailHandler} />
-                <label>Password</label>
-                <input type="password" value={Password} onChange={onPasswordHandler} />
-                <br />
-                <button type="submit">Login</button>
-            </form>
+                <Form.Item label="Email" name="email"
+                    rules={[
+                    {
+                        required: true,
+                        message: 'Please input your username!',
+                    },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item label="Password" name="password"
+                    rules={[
+                    {
+                        required: true,
+                        message: 'Please input your password!',
+                    },
+                    ]}
+                >
+                    <Input.Password />
+                </Form.Item>
+
+                <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+                    <Checkbox>Remember me</Checkbox>
+                </Form.Item>
+
+                <Form.Item {...tailLayout}>
+                    <Button type="primary" htmlType="submit">
+                    Login
+                    </Button>
+                </Form.Item>
+            </Form>
         </div>
     )
 }
