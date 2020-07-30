@@ -21,7 +21,7 @@ function App() {
   return (
     <Router>
     <Layout>
-      <Header><Title level={2}>KTO Photo Contest 2020S</Title></Header>
+      <Header><Title level={2}>TITLE</Title></Header>
       <Layout>
         <Sider>Sider</Sider>
         <Content>
