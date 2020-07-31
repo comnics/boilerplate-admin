@@ -1,5 +1,8 @@
 // config/dev.js
 module.exports = {
-    mongoURI: 'mongodb://localhost/test',
-
+    DBHost: 'localhost',
+    DBPort: '3306',
+    DBUser: 'kto',
+    DBPassword: '1qaz2wsx!@#$',
+    database: 'kto_photo'
 }
