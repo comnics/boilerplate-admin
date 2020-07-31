@@ -1,63 +1,28 @@
-// models/User.js
-//const mongoose = require("mongoose");
+/**
+ * models/User.js
+
+CREATE TABLE `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL DEFAULT '',
+  `password` varchar(512) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `del_yn` char(1) DEFAULT 'N',
+  `token` varchar(255) DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+ */ 
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const dbPool  = require('../libs/mariadbConn');
 
 const saltRounds = 10;
-/*
-const userSchema = mongoose.Schema({
-    name: {
-        type: String,
-        maxlength: 50,
-    },
-    email: {
-        type: String,
-        trim: true,
-        unique: 1,
-    },
-    password: {
-        type: String,
-        minlength: 5,
-    },
-    lastname: {
-        type: String,
-        maxlength: 50,
-    },
-    role: {
-        type: Number,
-        default: 0,
-    },
-    image: String,
-    token: {
-        type: String,
-    },
-    tokenExp: {
-        type: Number,
-    },
-});
-*/
 
-/*
-userSchema.pre("save", function (next) {
-    let user = this;
-
-    if (!user.isModified("password")) return next();
-
-    bcrypt.genSalt(saltRounds, function (err, salt) {
-        if (err) return next(err);
-
-        bcrypt.hash(user.password, salt, function (err, hash) {
-            if (err) return nexr(err);
-
-            user.password = hash;
-            console.log("password", user.password);
-            next();
-        });
-    });
-});
-*/
 const User = {
     comparePassword: (plainPassword, encryptedPawword, callback) => {
         bcrypt.compare(plainPassword, encryptedPawword, (err, isMatch) => {
