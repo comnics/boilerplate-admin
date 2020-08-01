@@ -122,7 +122,7 @@ const User = {
                         sql += ` AND ${key} = '${selectCondition[key]}'`;
                     }
                 };
-                console.log(sql);
+                //console.log(sql);
     
                 rows = await conn.query(sql);
                 cb(null);
