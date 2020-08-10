@@ -27,43 +27,8 @@ var upload = multer({storage: storage});
 router.use('/thumb', express.static(UPLOAD_FILE_THUMBNAIL_PATH));
 
 router.get('/', (req, res) => {
-    const offset = req.query.offset || 0;
-    const limit = req.query.limit || 9;
-
-    Photo.selectPhotos(offset, limit, (err, rows) => {
+    Photo.selectPhotos(0, 9, (err, rows) => {
         res.json({success: true, photos: rows});
-    });
-});
-
-router.delete('/', (req, res) => {
-    if(!req.query.shortcode){
-        res.json({success: false, msg:'Not exist parameter shortcode'});
-        return;
-    }
-    const shortcode = req.query.shortcode || 0;
-    Photo.deletePhoto(shortcode)
-    .then((result) => {
-        if(result){
-            res.json({success: true, msg:result});
-            return ;
-        } 
-        res.json({success: false});
-    });
-});
-
-router.put('/delete', (req, res) => {
-    if(!req.query.shortcode){
-        res.json({success: false, msg:'Not exist parameter shortcode'});
-        return;
-    }
-    const shortcode = req.query.shortcode || 0;
-    Photo.disablePhoto(shortcode)
-    .then((result) => {
-        if(result){
-            res.json({success: true, msg:result});
-            return ;
-        } 
-        res.json({success: false});
     });
 });
 

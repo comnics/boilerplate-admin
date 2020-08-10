@@ -26,7 +26,7 @@ function HeaderBasic(props) {
     };
 
     let selectedKeys = [];
-    if(props.location.pathname === '/' || props.location.pathname === '') selectedKeys.push("1");
+    if(props.location.pathname === '/') selectedKeys.push("1");
     if(props.location.pathname === '/photo/list') selectedKeys.push("2");
     if(props.location.pathname === '/photo/upload') selectedKeys.push("3");
 

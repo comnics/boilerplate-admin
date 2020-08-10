@@ -41,7 +41,7 @@ function App() {
                     </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>
-                    <Text>Copyright KTO 2020.</Text>
+                    <Text>Copyright OOOOO.</Text>
                     <Link href="http://#" target="_blank" style={{marginLeft: '10px'}}>
                         Front
                     </Link>
