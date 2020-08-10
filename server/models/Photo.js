@@ -50,6 +50,34 @@ const Photo = {
                 if(cb && typeof cb === 'function') cb(err);
             }
         });
+    },
+
+    deletePhoto: (shortcode) => {
+        return new Promise( async (resolve, reject) => {
+            dbPool.getConnection(async (conn) => {
+                try{
+                    let sql = `DELETE FROM photos WHERE shortcode = '${shortcode}'`;
+                    let res = await conn.query(sql);
+                    resolve(res);
+                }catch(err){
+                    reject(err);
+                }
+            });
+        });
+    },
+
+    disablePhoto: (shortcode) => {
+        return new Promise( async (resolve, reject) => {
+            dbPool.getConnection(async (conn) => {
+                try{
+                    let sql = `UPDATE photos SET is_use = 'N' WHERE shortcode = '${shortcode}'`;
+                    let res = await conn.query(sql);
+                    resolve(res);
+                }catch(err){
+                    reject(err);
+                }
+            });
+        })
     }
 
 };
