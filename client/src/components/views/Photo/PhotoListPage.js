@@ -89,7 +89,7 @@ function PhotoListPage(props) {
                     <List.Item>
                         <Card title={item.title}>
                             {item.kind === "K" ? "KTO Uploaded Image" : "Insta Image"}
-                            {item.kind === "K" ? <img src={`${ADMIN_PHOTO_URL}/${item.thumbnail_src}`} width="100%" /> : <img src={item.thumbnail_src} />}
+                            {item.kind === "K" ? <img src={`${ADMIN_PHOTO_URL}/${item.thumbnail_src}`} width="100%" /> : <img src={item.thumbnail_src} width="100%" />}
                             <div style={{paddingTop: '5px', textAlign: 'right'}}>
                                 <Button type="primary" danger onClick={(e) => deleteBtnClickHandler(e, item.shortcode)}>삭제</Button>
                             </div>

@@ -11,7 +11,7 @@ const uploadProps = {
     accept: ".jpg, .jpeg, .png, .gif",
     name: 'file',
     multiple: true,
-    action: 'http://localhost:5000/api/photos/upload',
+    action: '/api/photos/upload',
     beforeUpload(file) {
         if (!/jpe?g|png$/.test(file.type)) {
             message.error('Photo format error');
